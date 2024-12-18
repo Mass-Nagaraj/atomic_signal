@@ -15,9 +15,9 @@ export const TeamsRoutes: FastifyPluginAsync = async (
     fastify: FastifyInstance,
     options
   ): Promise<any> => {
-    // fastify.get("/teamhi",async function () {
-    //     return { teamhi: "hello team..!" }
-    // })
+    fastify.get("/teamhi",async function () {
+        return { teamhi: "hello team..!" }
+    })
     
     fastify.post("/add_team_member",{
         schema:{
