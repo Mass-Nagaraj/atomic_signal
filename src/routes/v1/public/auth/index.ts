@@ -8,7 +8,7 @@ const authRoute: FastifyPluginAsync = async (
     options
   ): Promise<any> => {
 
-    fastify.post("/sign_up",{ 
+    fastify.post("/sign_up",{
         schema:{
             body:$ref("createUserSchema"),
             response:{

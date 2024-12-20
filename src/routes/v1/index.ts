@@ -7,17 +7,6 @@ import { $ref, userSchemas } from "./public/auth/schema";
 import authRoute from "./public/auth";
 import { registerUserHandler } from "../../controllers/auth";
 import swaggerPlugin from '../../plugins/swagger'
-
-// const routesLoader = (fastify: FastifyInstance, sourceDir: string) => {
-//     fs.readdirSync(sourceDir, { withFileTypes: true })
-//       .filter((dirent: any) => dirent.isDirectory())
-//       .map((item: any) => item.name)
-//       .forEach(async (item: string) => {
-//         let route: any = await import(`${sourceDir}/${item}`);
-//         fastify.register(route.default, { prefix: `/api/v1/${item}` });
-//       })
-//   }
-
 import "@fastify/jwt";
 import { JWT } from "@fastify/jwt";
 import { server } from "../../app";
@@ -32,19 +21,7 @@ import { feedback_Response_Schema } from "./private/feedback_response/schema";
 
 
 export const routes= async ( fastify: FastifyInstance, done:any )=>{
-    
-//     //Routes of Public API
-    // routesLoader(fastify, path.join("src/routes/v1", "public"));
-    
-//     //Routes of Private API
-//     // routesLoader(fastify, path.join(__dirname, PRIVATE_FOLDER));
-    
-//     // //Routes of External API
-//     // routesLoader(fastify, path.join(__dirname, EXTERNAL_FOLDER));
 
-//    fastify.get("/hi",{ preHandler:[fastify.authenticate]}, (req: any, reply: any) => {
-//         reply.code(200).send({ message: "Server is up and running....🚀🚀" });
-//     });
 
     for(const schema of [...userSchemas,...teamsSchema,...feedbackSchema,...feedback_Response_Schema]) {
         fastify.addSchema(schema)

@@ -14,19 +14,6 @@ server.register(jwt, {
   secret: 'your-secret-key',
 });
 
-// declare module 'fastify' {
-//   export interface FastifyInstance {
-//       jwt:JWT
-//   }
-// }
-
-// declare module 'fastify' {
-//   export interface FastifyInstance {
-//       authenticate: any;
-//   }    
-// }  
-
-
 declare global {
   var status_codes: any;
 }
