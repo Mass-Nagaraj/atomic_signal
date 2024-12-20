@@ -29,7 +29,6 @@ export const TeamsRoutes: FastifyPluginAsync = async (
         }
     }, addTeam_member)
 
-    // fastify.put("/update_team_member_profile")
     fastify.get<{ Params: Profile_RequestSchema }>("/show_profile/:team_member_id", show_profile)
     fastify.put<{ Params: Profile_RequestSchema,Body:add_team_memberSchema  }>("/update_team_member_profile/:team_member_id", update_team_member_profile)
     fastify.get<{ Params: Show_My_team_members }>("/show_my_team_members/:team_lead_id",{ preHandler:[fastify.authenticate]}, show_my_team_members)
