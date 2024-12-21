@@ -73,11 +73,6 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // })
   void fastify.register(routes);
   // void fastify.register(swaggerPlugin)
-
-    
-    fastify.get('/hi', async function (request, reply) {
-      reply.send("Server is runnings")
-    })
     
 
     console.log("server is Listeing on Port http://localhost:3000");
