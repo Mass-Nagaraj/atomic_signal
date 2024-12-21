@@ -8,8 +8,7 @@ interface Profile_RequestSchema{
 
 interface Show_My_team_members{
     team_lead_id:string,
-   
-}
+}   
 
 export const TeamsRoutes: FastifyPluginAsync = async (
     fastify: FastifyInstance,

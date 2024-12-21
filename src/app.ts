@@ -6,7 +6,7 @@ import { userSchemas } from './routes/v1/public/auth/schema';
 import authRoute from './routes/v1/public/auth';
 import { JWT as FastifyJWT, JWT } from '@fastify/jwt';
 import jwt from '@fastify/jwt';
-
+import cors from "@fastify/cors";
 // Global API response data
 export const server= Fastify();
 
@@ -48,6 +48,15 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
+    // void  fastify.register(cors, {
+    //       origin: true,
+    //       methods: ['GET', 'POST', 'DELETE', 'PATCH',"OPTIONS"],
+    //       credentials: true,
+    //       allowedHeaders: ['Content-Type', 'Authorization'] ,
+    //       preflightContinue:true,
+    //       preflight:true
+    //     });
+
   void fastify.register(AutoLoad, {
    
     dir: join(__dirname, 'plugins'),
@@ -64,11 +73,6 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // })
   void fastify.register(routes);
   // void fastify.register(swaggerPlugin)
-
-    
-    fastify.get('/hello', async function (request, reply) {
-      return { app: "hello world" }
-    })
     
 
     console.log("server is Listeing on Port http://localhost:3000");
