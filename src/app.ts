@@ -48,11 +48,13 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
-      fastify.register(cors, {
-          origin: "http://localhost:5173",
-          methods: ['GET', 'POST', 'DELETE', 'PATCH'],
+    void  fastify.register(cors, {
+          origin: true,
+          methods: ['GET', 'POST', 'DELETE', 'PATCH',"OPTIONS"],
           credentials: true,
-          allowedHeaders: ['Content-Type', 'Authorization'] 
+          allowedHeaders: ['Content-Type', 'Authorization'] ,
+          preflightContinue:true,
+          preflight:true
         });
 
   void fastify.register(AutoLoad, {
