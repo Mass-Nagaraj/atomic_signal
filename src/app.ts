@@ -6,7 +6,7 @@ import { userSchemas } from './routes/v1/public/auth/schema';
 import authRoute from './routes/v1/public/auth';
 import { JWT as FastifyJWT, JWT } from '@fastify/jwt';
 import jwt from '@fastify/jwt';
-
+import cors from "@fastify/cors";
 // Global API response data
 export const server= Fastify();
 
@@ -48,6 +48,13 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
+      fastify.register(cors, {
+          origin: "http://localhost:5173",
+          methods: ['GET', 'POST', 'DELETE', 'PATCH'],
+          credentials: true,
+          allowedHeaders: ['Content-Type', 'Authorization'] 
+        });
+
   void fastify.register(AutoLoad, {
    
     dir: join(__dirname, 'plugins'),
@@ -66,8 +73,8 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // void fastify.register(swaggerPlugin)
 
     
-    fastify.get('/hello', async function (request, reply) {
-      return { app: "hello world" }
+    fastify.get('/hi', async function (request, reply) {
+      reply.send("Server is runnings")
     })
     
 

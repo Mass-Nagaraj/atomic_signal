@@ -21,7 +21,8 @@ export const feedBackRoutes: FastifyPluginAsync = async (
       
     fastify.get("/get_perfomances",{ preHandler:[fastify.authenticate]}, get_perfomances)
 
-    fastify.get("/get_signals",{ preHandler:[fastify.authenticate]}, get_signals)
+    fastify.get("/get_signals", get_signals)
+//{ preHandler:[fastify.authenticate]},
 
     fastify.get("/getRoles",{ preHandler:[fastify.authenticate]}, getRoles)
 

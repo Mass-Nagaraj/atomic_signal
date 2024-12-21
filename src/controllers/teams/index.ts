@@ -50,8 +50,6 @@ export async function addTeam_member(
         })
 
         return reply.code(201).send(add_member);
-         
-        
 
     }catch (error) {
      

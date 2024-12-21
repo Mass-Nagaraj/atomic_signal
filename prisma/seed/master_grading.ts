@@ -4,36 +4,36 @@ import {v4 as uuidv4} from 'uuid';
 
 const data = [
     {
-      id:`008b797b-464f-4293-a106-8a0a22409acb`,
-      name: "DeliveryOps",
+      id:`7a6a3b3b-d96c-4ae5-a247-b64ae9e75280`,
+      name: "Completely awayefk",
       is_active: true,
       created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
     },
     {
-      id:`14d49f34-bef8-4907-ba8c-327e89ce5ff1`, 
-      name: "Design",
+      id:`274f6332-07c1-4f39-8dd1-ac13f13fe4d3`, 
+      name: "Need to improve a lot",
       is_active: true,
       created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
     },
     {
-      id:`319dbaa2-0f93-4e51-b8e5-dfca48dcfcdd`,
-      name: "Engineering",
+      id:`4d64b3b0-75f0-47a5-8724-a3b2376585eb`,
+      name: "Need to improve",
       is_active: true,
       created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
     },
     {
-      id:`495396e9-4f15-4e09-a883-4ffd3712c4d2`,
-      name: "HR",
+      id:`bea3216b-99fb-4af7-a0ab-1865538ca9cb`,
+      name: "Good",
       is_active: true,
       created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
     },
     {
-      id:`5897e543-b538-4248-aed1-2910491e5e9b`,
-      name: "Management",
+      id:`b2bcc150-5c18-4058-ac3a-f2249f472c41`,
+      name: "Very Good",
       is_active: true,
       created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
@@ -46,8 +46,15 @@ const data = [
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
     },
     {
-      id:`aad6ece7-21d0-4ae4-9f2e-e1fade7f2fae`,
-      name: "Product",
+      id:`95fcf9c1-cd0b-40c1-929c-2ee13953beb0`,
+      name: "Spectacular",
+      is_active: true,
+      created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
+      updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
+    },
+    {
+      id:`eb0bbdd4-d781-4699-86ef-58ce9fbdd944`,
+      name: "Impactful",
       is_active: true,
       created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
@@ -55,18 +62,22 @@ const data = [
     
   ];
   
-async function createMasterDepartments() {
-  for (const record of data) {
-    await prisma.departments_master.upsert({
-      where: { id: record.id },
-      update: record,
-      create: record,
-    });
+async function createMasterGrading() {
+  try{
+
+    for (const record of data) {
+      await prisma.grading_master.upsert({
+        where: { id: record.id },
+        update: record,
+        create: record,
+      });
+    }
+     console.log("seed completed"); 
+  }catch(e){
+    console.log("Error occurs ",e)
   }
 }
 
-export default createMasterDepartments;
+export default createMasterGrading;
 
 
-
-  
