@@ -1,10 +1,3 @@
-// This is your Prisma schema file,
-
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,190 +7,171 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model feedback_type_master {
+  id         Int       @id @default(autoincrement())
+  name       String
+  is_active  Boolean
+  created_by String?   @db.Uuid
+  updated_by String?   @db.Uuid
+  deleted_by String?   @db.Uuid
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  deleted_at DateTime? @default(now()) @db.Timestamp(6)
+  users      users[]
+}
+
+model users {
+  id                String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_name         String
+  email             String               @unique
+  password          String
+  salt              String
+  img_url           String?
+  designation       Role
+  workspace_name    String
+  feedback_type_id  Int
+  is_active         Boolean
+  created_by        String?              @db.Uuid
+  updated_by        String?              @db.Uuid
+  deleted_by        String?              @db.Uuid
+  created_at        DateTime?            @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?            @default(now()) @db.Timestamp(6)
+  deleted_at        DateTime?            @default(now()) @db.Timestamp(6)
+  send_feedbacks    feedbacks[]          @relation("FeedbacksFromTeam_lead")
+  receive_feedbacks feedbacks[]          @relation("FeedbacksFromTeam_member")
+  roports           team_members[]       @relation("reports")
+  team_member_id    team_members[]       @relation("TeamsMember_id")
+  feedback_type     feedback_type_master @relation(fields: [feedback_type_id], references: [id])
+}
+
+model departments_master {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  is_active    Boolean
+  created_by   String?        @db.Uuid
+  updated_by   String?        @db.Uuid
+  deleted_by   String?        @db.Uuid
+  created_at   DateTime?      @default(now()) @db.Timestamp(6)
+  updated_at   DateTime?      @default(now()) @db.Timestamp(6)
+  deleted_at   DateTime?      @default(now()) @db.Timestamp(6)
+  team_members team_members[]
+}
+
+model designation_master {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  is_active    Boolean
+  created_by   String?        @db.Uuid
+  updated_by   String?        @db.Uuid
+  deleted_by   String?        @db.Uuid
+  created_at   DateTime?      @default(now()) @db.Timestamp(6)
+  updated_at   DateTime?      @default(now()) @db.Timestamp(6)
+  deleted_at   DateTime?      @default(now()) @db.Timestamp(6)
+  team_members team_members[]
+}
+
+model role_master {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  is_active    Boolean
+  created_by   String?        @db.Uuid
+  updated_by   String?        @db.Uuid
+  deleted_by   String?        @db.Uuid
+  created_at   DateTime?      @default(now()) @db.Timestamp(6)
+  updated_at   DateTime?      @default(now()) @db.Timestamp(6)
+  deleted_at   DateTime?      @default(now()) @db.Timestamp(6)
+  team_members team_members[]
+}
+
+model team_members {
+  id             String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name           String
+  email          String
+  team_member_id String             @db.Uuid
+  join_date      String
+  department_id  String             @db.Uuid
+  designation_id String             @db.Uuid
+  role_id        String             @db.Uuid
+  report_to      String             @db.Uuid
+  is_active      Boolean
+  created_by     String?            @db.Uuid
+  updated_by     String?            @db.Uuid
+  deleted_by     String?            @db.Uuid
+  created_at     DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at     DateTime?          @default(now()) @db.Timestamp(6)
+  deleted_at     DateTime?          @default(now()) @db.Timestamp(6)
+  department     departments_master @relation(fields: [department_id], references: [id])
+  designation    designation_master @relation(fields: [designation_id], references: [id])
+  team_lead      users              @relation("reports", fields: [report_to], references: [id])
+  role           role_master        @relation(fields: [role_id], references: [id])
+  team_mate      users              @relation("TeamsMember_id", fields: [team_member_id], references: [id])
+}
+
+model signals_master {
+  id         String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  is_active  Boolean
+  created_by String?     @db.Uuid
+  updated_by String?     @db.Uuid
+  deleted_by String?     @db.Uuid
+  created_at DateTime?   @default(now()) @db.Timestamp(6)
+  updated_at DateTime?   @default(now()) @db.Timestamp(6)
+  deleted_at DateTime?   @default(now()) @db.Timestamp(6)
+  feedbacks  feedbacks[]
+}
+
+model performance_master {
+  id         String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  is_active  Boolean
+  created_by String?     @db.Uuid
+  updated_by String?     @db.Uuid
+  deleted_by String?     @db.Uuid
+  created_at DateTime?   @default(now()) @db.Timestamp(6)
+  updated_at DateTime?   @default(now()) @db.Timestamp(6)
+  deleted_at DateTime?   @default(now()) @db.Timestamp(6)
+  feedbacks  feedbacks[]
+}
+
+model feedbacks {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  from_id            String             @db.Uuid
+  to_id              String             @db.Uuid
+  siganl_id          String             @db.Uuid
+  perfomance_id      String             @db.Uuid
+  feeback            String
+  comments           String
+  reveal_my_identify Boolean
+  is_active          Boolean
+  created_by         String?            @db.Uuid
+  updated_by         String?            @db.Uuid
+  deleted_by         String?            @db.Uuid
+  created_at         DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at         DateTime?          @default(now()) @db.Timestamp(6)
+  deleted_at         DateTime?          @default(now()) @db.Timestamp(6)
+  response           feedback_response?
+  from               users              @relation("FeedbacksFromTeam_lead", fields: [from_id], references: [id])
+  performance        performance_master @relation(fields: [perfomance_id], references: [id])
+  signal             signals_master     @relation(fields: [siganl_id], references: [id])
+  to                 users              @relation("FeedbacksFromTeam_member", fields: [to_id], references: [id])
+}
+
+model feedback_response {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  feedback_id String    @unique @db.Uuid
+  response    String
+  is_active   Boolean
+  created_by  String?   @db.Uuid
+  updated_by  String?   @db.Uuid
+  deleted_by  String?   @db.Uuid
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  updated_at  DateTime? @default(now()) @db.Timestamp(6)
+  deleted_at  DateTime? @default(now()) @db.Timestamp(6)
+  feedbacks   feedbacks @relation(fields: [feedback_id], references: [id])
+}
+
 enum Role {
   ADMIN
   MANAGER
   EMPLOYEE
 }
-
-model feedback_type_master{
-  id Int @id @default(autoincrement())
-  name String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  users users[]
-}
-
-model users {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_name String
-  email String @unique
-  password String
-  salt String
-  img_url String?
-  designation Role
-  workspace_name String
-  feedback_type_id Int
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  feedback_type feedback_type_master @relation(fields: [feedback_type_id],references: [id])
-  team_member_id team_members[] @relation("TeamsMember_id")
-  roports team_members[] @relation("reports")
-  send_feedbacks feedbacks[]  @relation("FeedbacksFromTeam_lead")
-  receive_feedbacks feedbacks[]  @relation("FeedbacksFromTeam_member")
-  
-}
-
-model departments_master{
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  team_members team_members[]
-}
-
-model designation_master{
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  team_members team_members[]
-}
-
-model role_master{
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  team_members team_members[]
-}
-
-model team_members {
-  id                  String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name                String
-  email               String
-  team_member_id      String            @db.Uuid          
-  join_date           String
-  department_id       String             @db.Uuid
-  designation_id      String             @db.Uuid
-  role_id             String             @db.Uuid
-  report_to           String             @db.Uuid
-  is_active           Boolean
-  created_by          String?            @db.Uuid
-  updated_by          String?            @db.Uuid
-  deleted_by          String?            @db.Uuid
-  created_at          DateTime?          @default(now()) @db.Timestamp(6)
-  updated_at          DateTime?          @default(now()) @db.Timestamp(6)
-  deleted_at          DateTime?          @default(now()) @db.Timestamp(6)
-
-  // Relations
-  department          departments_master @relation(fields: [department_id], references: [id])
-  designation         designation_master @relation(fields: [designation_id], references: [id])
-  role                role_master        @relation(fields: [role_id], references: [id])
-  team_mate        users              @relation("TeamsMember_id", fields: [team_member_id], references: [id])
-  team_lead users @relation("reports", fields: [report_to], references: [id])
- 
-}
-
-model signals_master{
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  feedbacks feedbacks[]
-}
-
-model performance_master{
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  feedbacks feedbacks[]
-}
-
-model feedbacks{
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  from_id String @db.Uuid
-  to_id String @db.Uuid
-  siganl_id String @db.Uuid
-  perfomance_id String @db.Uuid
-  feeback String 
-  comments String 
-  reveal_my_identify Boolean
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  from       users          @relation("FeedbacksFromTeam_lead", fields: [from_id], references: [id])
-  to         users          @relation("FeedbacksFromTeam_member", fields: [to_id], references: [id])
-  signal signals_master @relation(fields: [siganl_id],references: [id])
-  performance performance_master @relation(fields: [perfomance_id],references: [id])
-  response feedback_response?
-}
-
-model feedback_response {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  feedback_id                                                String        @db.Uuid @unique
-  response String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  feedbacks feedbacks @relation(fields: [feedback_id],references: [id])
-
-}
-
-
-model grading_master{
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  is_active Boolean
-  created_by                                                 String?        @db.Uuid
-  updated_by                                                 String?        @db.Uuid
-  deleted_by                                                 String?        @db.Uuid
-  created_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  updated_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-  deleted_at                                                 DateTime?      @default(now()) @db.Timestamp(6)
-}
-
