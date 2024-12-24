@@ -6,27 +6,19 @@ import {
 import { prisma } from "../../utils.ts/prisma";
 import { UpdateGrade } from "../../routes/v1/private/Grading/schema";
 
-interface GradeId {
-  grade_id: string;
-}
-
-export async function edit_grading(
+export async function EditGrade(
   request: FastifyRequest<{
-    Params: GradeId;
     Body: UpdateGrade;
   }>,
   reply: FastifyReply
 ) {
   try {
-    const { name } = request.body;
-    const { grade_id } = request.params; // This should be {} closed bracktes .Params varcables
+    const { id, name, is_active } = request.body;
     const updated_grade = await prisma.grading_master.update({
-      //
-      //
       where: {
-        id: grade_id,
+        id: id,
       },
-      data: { name },
+      data: { name: name, is_active: is_active },
     });
 
     return reply.code(200).send(updated_grade);
