@@ -2,7 +2,6 @@ import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
 import { CreateUserSchema, loginInput } from "../../routes/v1/public/auth/schema";
 import { prisma } from "../../utils.ts/prisma";
 import { hashPassword, verifyPassword } from "../../utils.ts/hash";
-import { server } from "../../app";
 import fastifyPlugin from "fastify-plugin";
 import exp from "constants";
 

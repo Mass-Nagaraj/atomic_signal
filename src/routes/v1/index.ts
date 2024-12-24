@@ -17,7 +17,6 @@ import { registerUserHandler } from "../../controllers/auth";
 import swaggerPlugin from "../../plugins/swagger";
 import "@fastify/jwt";
 import { JWT } from "@fastify/jwt";
-import { server } from "../../app";
 import forget_password from "./public/forget_password";
 import { TeamsRoutes } from "./private/teams";
 import { teamsSchema } from "./private/teams/schema";
