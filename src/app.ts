@@ -8,23 +8,11 @@ import { JWT as FastifyJWT, JWT } from '@fastify/jwt';
 import jwt from '@fastify/jwt';
 
 // Global API response data
-export const server= Fastify();
+// export const server= Fastify();
 
-server.register(jwt, {
-  secret: 'your-secret-key',
-});
-
-// declare module 'fastify' {
-//   export interface FastifyInstance {
-//       jwt:JWT
-//   }
-// }
-
-// declare module 'fastify' {
-//   export interface FastifyInstance {
-//       authenticate: any;
-//   }    
-// }  
+// server.register(jwt, {
+//   secret: 'your-secret-key',
+// });
 
 
 declare global {
@@ -47,20 +35,18 @@ export interface AppOptions extends FastifyServerOptions, Partial<AutoloadPlugin
 
 }
 // Pass --options via CLI arguments in command to enable these options.
-const options: AppOptions = {
-}
+const options: AppOptions = {}
 
 const app: FastifyPluginAsync<AppOptions> = async (
     fastify,
     opts
 ): Promise<void> => {
-  // Place here your custom code!
+ 
+  // fastify.register(jwt,{
+  //   secret: 'your-secret-key',
+  // })
 
-  // Do not touch the following lines
 
-  // This loads all plugins defined in plugins
-  // those should be support plugins that are reused
-  // through your application
   void fastify.register(AutoLoad, {
    
     dir: join(__dirname, 'plugins'),
@@ -78,14 +64,22 @@ const app: FastifyPluginAsync<AppOptions> = async (
   void fastify.register(routes);
   // void fastify.register(swaggerPlugin)
 
-    
+  const PORT = 5000;  
+
     fastify.get('/hello', async function (request, reply) {
       return { app: "hello world" }
     })
+
+    fastify.listen({ 
+      port: PORT,
+      host: '0.0.0.0'  // Listen on all available network interfaces
+    }, (err) => {
+      if (err) throw err
+    })
     
 
-    console.log("server is Listeing on Port http://localhost:3000");
-    console.log("Swagger is Available on Port http://localhost:3000/docs");
+    console.log(`server is Listeing on Port http://localhost:${PORT}`);
+    console.log("Swagger is Available on Port http://localhost:5000/docs");
     
 };
 

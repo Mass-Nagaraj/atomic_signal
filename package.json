@@ -18,7 +18,8 @@
     "create": "prisma migrate deploy",
     "reset": "npm run drop && npm run create",
     "migrate": "npx prisma migrate deploy",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "start:dev": "nodemon ./src/app.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -28,28 +29,35 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/autoload": "^6.0.0",
-    "@fastify/cors": "^10.0.1",
+    "@fastify/cors": "^8.2.0",
     "@fastify/env": "^5.0.1",
     "@fastify/jwt": "^6.7.1",
     "@fastify/sensible": "^5.6.0",
     "@fastify/swagger": "^8.3.1",
     "@fastify/swagger-ui": "^1.4.0",
-    "@prisma/client": "^5.21.1",
-    "fastify": "^4.28.1",
-    "fastify-cli": "^7.0.1",
-    "fastify-plugin": "^5.0.0",
-    "fastify-zod": "^1.4.0",
-    "uuid": "^11.0.1",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
+    "@prisma/client": "^6.1.0",
+
+    "@supabase/supabase-js": "^2.47.10",
     "@types/fastify-jwt": "^0.8.3",
     "@types/node": "^22.8.1",
     "c8": "^10.1.2",
     "concurrently": "^9.0.0",
+    "fastify": "^4.28.1",
+    "fastify-cli": "^7.0.1",
+    "fastify-plugin": "^5.0.0",
     "fastify-tsconfig": "^2.0.0",
+    "fastify-zod": "^1.4.0",
+    "nodemon": "^3.1.9",
+    "postgres": "^3.4.5",
+    "prisma": "^6.1.0",
+    "supabase": "^2.1.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "uuid": "^11.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "prisma": "^6.1.0"
   }
 }

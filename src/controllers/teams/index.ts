@@ -2,7 +2,6 @@ import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import {  CreateUserSchema, loginInput } from "../../routes/v1/public/auth/schema";
 import { prisma } from "../../utils.ts/prisma";
 import { hashPassword, verifyPassword } from "../../utils.ts/hash";
-import { server } from "../../app";
 import { add_team_memberSchema } from "../../routes/v1/private/teams/schema";
 import { createfeedBackReq_Schema } from "../../routes/v1/private/feedbacks/schema";
 
