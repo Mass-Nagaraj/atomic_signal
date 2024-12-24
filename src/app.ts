@@ -13,20 +13,11 @@ import { JWT as FastifyJWT, JWT } from "@fastify/jwt";
 import jwt from "@fastify/jwt";
 import cors from "@fastify/cors";
 // Global API response data
-<<<<<<< HEAD
-// export const server= Fastify();
-
-// server.register(jwt, {
-//   secret: 'your-secret-key',
-// });
-
-=======
 export const server = Fastify();
 
 server.register(jwt, {
   secret: "ASbTB_XeicE*YHK!b-H8",
 });
->>>>>>> fa1e7596ecde164f2f7a60c669db8d58a91f17f7
 
 declare global {
   var status_codes: any;
@@ -46,11 +37,7 @@ export interface AppOptions
   extends FastifyServerOptions,
     Partial<AutoloadPluginOptions> {}
 // Pass --options via CLI arguments in command to enable these options.
-<<<<<<< HEAD
-const options: AppOptions = {}
-=======
 const options: AppOptions = {};
->>>>>>> fa1e7596ecde164f2f7a60c669db8d58a91f17f7
 
 const app: FastifyPluginAsync<AppOptions> = async (
   fastify,
@@ -62,8 +49,6 @@ const app: FastifyPluginAsync<AppOptions> = async (
   // })
 
 
-<<<<<<< HEAD
-=======
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
@@ -76,7 +61,6 @@ const app: FastifyPluginAsync<AppOptions> = async (
   //       preflight:true
   //     });
 
->>>>>>> fa1e7596ecde164f2f7a60c669db8d58a91f17f7
   void fastify.register(AutoLoad, {
     dir: join(__dirname, "plugins"),
     options: opts,
@@ -93,28 +77,8 @@ const app: FastifyPluginAsync<AppOptions> = async (
   void fastify.register(routes);
   // void fastify.register(swaggerPlugin)
 
-<<<<<<< HEAD
-  const PORT = 5000;  
-
-    fastify.get('/hello', async function (request, reply) {
-      return { app: "hello world" }
-    })
-
-    fastify.listen({ 
-      port: PORT,
-      host: '0.0.0.0'  // Listen on all available network interfaces
-    }, (err) => {
-      if (err) throw err
-    })
-    
-
-    console.log(`server is Listeing on Port http://localhost:${PORT}`);
-    console.log("Swagger is Available on Port http://localhost:5000/docs");
-    
-=======
   console.log("server is Listeing on Port http://localhost:3000");
   console.log("Swagger is Available on Port http://localhost:3000/docs");
->>>>>>> fa1e7596ecde164f2f7a60c669db8d58a91f17f7
 };
 
 export default app;

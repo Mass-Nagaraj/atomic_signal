@@ -7,10 +7,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-<<<<<<< HEAD
-=======
     // "typeRoots": ["./node_modules/@types"],
->>>>>>> fa1e7596ecde164f2f7a60c669db8d58a91f17f7
     "types": ["node"]
   },
   "include": ["src/**/*.ts", "src/fastify.d.ts"], // Adjust based on your project structure
