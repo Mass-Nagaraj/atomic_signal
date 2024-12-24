@@ -17,7 +17,7 @@ export const DeptRoutes: FastifyPluginAsync = async (
     
     fastify.post("/addDept",{
         schema:{
-            preHandler:[fastify.authenticate],
+            // preHandler:[fastify.authenticate],
             body:$ref("addDept"),
             response:{
                 200:$ref("Added_deptResponse")

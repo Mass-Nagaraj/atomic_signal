@@ -1,12 +1,20 @@
-import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import fastify, {
+  FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
+} from "fastify";
 import fs from "fs";
 import path from "path";
-import { pathToFileURL } from 'url';
-import { EXTERNAL_FOLDER, PRIVATE_FOLDER, PUBLIC_FOLDER } from "../../utils.ts/constants";
+import { pathToFileURL } from "url";
+import {
+  EXTERNAL_FOLDER,
+  PRIVATE_FOLDER,
+  PUBLIC_FOLDER,
+} from "../../utils.ts/constants";
 import { $ref, userSchemas } from "./public/auth/schema";
 import authRoute from "./public/auth";
 import { registerUserHandler } from "../../controllers/auth";
-import swaggerPlugin from '../../plugins/swagger'
+import swaggerPlugin from "../../plugins/swagger";
 import "@fastify/jwt";
 import { JWT } from "@fastify/jwt";
 import { server } from "../../app";
@@ -24,27 +32,29 @@ import { DeptRoutes } from "./private/department_master";
 import { GradingRoutes } from "./private/Grading";
 import { GradeSchema } from "./private/Grading/schema";
 
+export const routes = async (fastify: FastifyInstance, done: any) => {
+  for (const schema of [
+    ...userSchemas,
+    ...teamsSchema,
+    ...feedbackSchema,
+    ...feedback_Response_Schema,
+    ...signalSchema,
+    ...DeptSchema,
+    ...GradeSchema,
+  ]) {
+    fastify.addSchema(schema);
+  }
+  fastify.register(authRoute, { prefix: "/public/api/users" });
+  fastify.register(forget_password, { prefix: "/public/api/users" });
 
+  fastify.register(TeamsRoutes, { prefix: "/private/api/users" });
+  fastify.register(SignalsRoutes, { prefix: "/private/api/signals" });
+  fastify.register(DeptRoutes, { prefix: "/private/api/dept" });
 
-export const routes= async ( fastify: FastifyInstance, done:any )=>{
+  fastify.register(GradingRoutes, { prefix: "/private/api/grades" });
 
+  fastify.register(feedBackRoutes, { prefix: "/private/api/users" });
+  fastify.register(feedBack_RepliesRoutes, { prefix: "/private/api/users" });
 
-    for(const schema of [...userSchemas,...teamsSchema,...feedbackSchema,...feedback_Response_Schema,...signalSchema,...DeptSchema,...GradeSchema]) {
-        fastify.addSchema(schema)
-    }
-    fastify.register(authRoute,{prefix:"/public/api/users"})
-    fastify.register(forget_password,{prefix:"/public/api/users"})
-    
-    fastify.register(TeamsRoutes,{prefix:"/private/api/users"})
-    fastify.register(SignalsRoutes,{prefix:"/private/api/signals"})
-    fastify.register(DeptRoutes,{prefix:"/private/api/dept"})
-    fastify.register(GradingRoutes,{prefix:"/private/api/grades"})
-    fastify.register(feedBackRoutes,{prefix:"/private/api/users"})
-    fastify.register(feedBack_RepliesRoutes,{prefix:"/private/api/users"})
-
-    // fastify.register(swaggerPlugin)
-    
-}
-
-
-
+  // fastify.register(swaggerPlugin)
+};
