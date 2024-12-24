@@ -5,7 +5,7 @@ import {v4 as uuidv4} from 'uuid';
 const data = [
     {
       id:`008b797b-464f-4293-a106-8a0a22409acb`,
-      name: "DelivaryOps",
+      name: "DeliveryOps",
       is_active: true,
       created_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",
       updated_by: "4aeb412b-f445-4a1a-96aa-37055e693ec7",

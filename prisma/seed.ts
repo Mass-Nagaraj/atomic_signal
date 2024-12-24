@@ -5,6 +5,7 @@ import createMasterDesignations from "./seed/master_designations";
 import createMasterRoles from "./seed/master_role";
 import createMasterSignals from "./seed/master_signals";
 import createMasterPerformance from "./seed/master_performance";
+import createMasterGrading from "./seed/master_grading";
 
 const prisma = new PrismaClient();
 
@@ -16,6 +17,7 @@ async function main(){
     await createMasterDesignations();
     await createMasterSignals();
     await createMasterPerformance();
+    await createMasterGrading();
 }
 
 main()
