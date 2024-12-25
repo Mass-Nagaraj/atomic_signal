@@ -15,6 +15,8 @@ const swaggerPlugin: FastifyPluginCallback<SwaggerOptions> = async (
           description: "Swagger API documentation",
           version: "1.0.0",
         },
+        host: 'https://atomic-signal-7jqv.onrender.com/', // Replace with your deployed server's hostname
+        schemes: ['https'], // Use 'http' if SSL is not enabled    
       },
       exposeRoute: true,
     });
