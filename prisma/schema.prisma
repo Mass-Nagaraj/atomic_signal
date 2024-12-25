@@ -170,8 +170,23 @@ model feedback_response {
   feedbacks   feedbacks @relation(fields: [feedback_id], references: [id])
 }
 
+model grading_master {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  is_active   Boolean
+  created_by  String?   @db.Uuid
+  updated_by  String?   @db.Uuid
+  deleted_by  String?   @db.Uuid
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  updated_at  DateTime? @default(now()) @db.Timestamp(6)
+  deleted_at  DateTime? @default(now()) @db.Timestamp(6)
+}
+
 enum Role {
   ADMIN
   MANAGER
   EMPLOYEE
 }
+
+
+
