@@ -79,7 +79,7 @@ export async function loginHandler(
             // console.log()
             console.log(user);
             
-            return reply.send([accessToken,user])
+            return reply.send({accessToken,user})
         }else{
             return reply.code(401).send({
                 message:"Invalid password...!"
