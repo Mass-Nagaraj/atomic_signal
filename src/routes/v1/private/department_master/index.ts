@@ -4,6 +4,7 @@ import { FastifyInstance, FastifyPluginAsync } from 'fastify';
 import { $ref, DeptSchema, UpdateDeptSchema } from './schema';
 import { addSignal, update_signal } from '../../../../controllers/signals';
 import {  add_Deptartment, update_dept } from '../../../../controllers/departments';
+import { getDepts } from '../../../../controllers/teams';
 
 
 interface dept{
@@ -26,5 +27,10 @@ export const DeptRoutes: FastifyPluginAsync = async (
     }, add_Deptartment)
     
     fastify.put<{ Params: dept,Body:UpdateDeptSchema  }>("/editdept/:dept_id",update_dept)
-   
+    fastify.get(
+        "/getDepts",
+        { preHandler: [fastify.authenticate] },
+        getDepts
+      );
+
 }
