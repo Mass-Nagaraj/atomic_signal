@@ -209,8 +209,7 @@ export async function getDepts(
     
 ) {
     try{
-        
-                
+                 
         const team_members = await prisma.team_members.findMany();
         
         return team_members;
