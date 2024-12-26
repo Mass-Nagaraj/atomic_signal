@@ -202,9 +202,7 @@ export async function show_my_team_members(
 
 export async function getDepts(
     
-    request:FastifyRequest<{
-        Params:Show_My_team_members
-    }>,
+    request:FastifyRequest,
     reply:FastifyReply
     
 ) {
