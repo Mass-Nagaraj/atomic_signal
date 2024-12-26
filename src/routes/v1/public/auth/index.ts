@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify';
-import {  loginHandler, registerUserHandler } from '../../../../controllers/auth';
+import {  getUserDetails, loginHandler, registerUserHandler } from '../../../../controllers/auth';
 import { $ref } from './schema';
 import { show_my_team_members, show_profile } from '../../../../controllers/teams';
 
@@ -28,6 +28,11 @@ const authRoute: FastifyPluginAsync = async (
     }, async (request: any, reply) => {
         
         await loginHandler(fastify,request,reply);         
+    });
+
+    fastify.get("/getUserDetails", async (request: any, reply) => {
+        
+        await getUserDetails(fastify,request,reply);         
     });
 
 
