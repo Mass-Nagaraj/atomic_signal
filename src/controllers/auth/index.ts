@@ -77,9 +77,9 @@ export async function loginHandler(
             // Generate Access Token
             const accessToken=fastify.jwt.sign({email:user.email}); 
             // console.log()
-            console.log(user);
+            // console.log(user);
             
-            return reply.send({accessToken,loged_user_details :user})
+            return reply.send({accessToken})
         }else{
             return reply.code(401).send({
                 message:"Invalid password...!"
@@ -90,6 +90,36 @@ export async function loginHandler(
         console.log(error);
         return reply.code(500).send(error)
     }
+
+}
+
+
+
+export async function getUserDetails(
+    fastify: FastifyInstance, 
+    request:FastifyRequest<{
+        Body:loginInput
+    }>,
+    reply:FastifyReply,
+
+) {
+    try{
+        const body=request.body;
+
+        const user=await findUserByEmail(body.email);
+        
+        if(!user) {
+            return reply.code(401).send({
+                message:"Invalid email "
+            })
+        }
+
+        reply.send(user);
+}
+
+catch(error) {
+    reply.send(error);
+}
 
 }
 
