@@ -5,6 +5,9 @@ import { hashPassword, verifyPassword } from "../../utils.ts/hash";
 import fastifyPlugin from "fastify-plugin";
 import exp from "constants";
 
+interface email {
+ email:string
+}
 
 export async function registerUserHandler(
 
@@ -96,17 +99,15 @@ export async function loginHandler(
 
 
 export async function getUserDetails(
-    fastify: FastifyInstance, 
     request:FastifyRequest<{
-        Body:loginInput
+         Params: email 
     }>,
-    reply:FastifyReply,
-
+    reply:FastifyReply
 ) {
     try{
-        const body=request.body;
-
-        const user=await findUserByEmail(body.email);
+       
+        const {email} = request.params;
+        const user=await findUserByEmail(email);
         
         if(!user) {
             return reply.code(401).send({

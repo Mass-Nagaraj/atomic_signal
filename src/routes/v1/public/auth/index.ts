@@ -3,6 +3,9 @@ import {  getUserDetails, loginHandler, registerUserHandler } from '../../../../
 import { $ref } from './schema';
 import { show_my_team_members, show_profile } from '../../../../controllers/teams';
 
+interface email{
+    email :string
+}
 const authRoute: FastifyPluginAsync = async (
     fastify: FastifyInstance,
     options
@@ -29,11 +32,12 @@ const authRoute: FastifyPluginAsync = async (
         
         await loginHandler(fastify,request,reply);         
     });
+    
 
-    fastify.get("/getUserDetails", async (request: any, reply) => {
-        
-        await getUserDetails(fastify,request,reply);         
-    });
+      fastify.get<{ Params: email }>(
+        "/getUserDetails",
+        getUserDetails
+      );
 
 
 };
