@@ -3,8 +3,7 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify';
 import { $ref, DeptSchema, UpdateDeptSchema } from './schema';
 import { addSignal, update_signal } from '../../../../controllers/signals';
-import {  add_Deptartment, update_dept } from '../../../../controllers/departments';
-import { getDepts } from '../../../../controllers/teams';
+import {  add_Deptartment, getDepts, update_dept } from '../../../../controllers/departments';
 
 
 interface dept{

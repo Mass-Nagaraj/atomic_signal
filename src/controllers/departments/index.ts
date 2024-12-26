@@ -36,6 +36,23 @@ export async function add_Deptartment(
 
 }
 
+export async function getDepts(
+    
+    request:FastifyRequest,
+    reply:FastifyReply
+    
+) {
+    try{
+                 
+        const team_members = await prisma.departments_master.findMany();
+        
+        return team_members;
+        
+    }catch(error) {
+        return reply.code(200).send(error)
+    }
+}
+
 export async function update_dept(
     request:FastifyRequest<{
          Params: dept,
