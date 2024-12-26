@@ -76,7 +76,8 @@ export async function loginHandler(
             console.log(user);
             // Generate Access Token
             const accessToken=fastify.jwt.sign({email:user.email}); 
-            return reply.send({accessToken})
+            console.log()
+            return reply.send([accessToken,user.id])
         }else{
             return reply.code(401).send({
                 message:"Invalid password...!"
