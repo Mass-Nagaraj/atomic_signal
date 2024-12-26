@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import {
   addTeam_member,
-  getDepts,
+
   show_my_team_members,
   show_profile,
   update_team_member_profile,
