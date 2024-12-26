@@ -30,6 +30,7 @@ import { DeptSchema } from "./private/department_master/schema";
 import { DeptRoutes } from "./private/department_master";
 import { GradingRoutes } from "./private/Grading";
 import { GradeSchema } from "./private/Grading/schema";
+import { DestinationsRoutes } from "./private/destinations";
 
 export const routes = async (fastify: FastifyInstance, done: any) => {
   for (const schema of [
@@ -49,6 +50,7 @@ export const routes = async (fastify: FastifyInstance, done: any) => {
   fastify.register(TeamsRoutes, { prefix: "/private/api/users" });
   fastify.register(SignalsRoutes, { prefix: "/private/api/signals" });
   fastify.register(DeptRoutes, { prefix: "/private/api/dept" });
+  fastify.register(DestinationsRoutes, { prefix: "/private/api/destinations" });
 
   fastify.register(GradingRoutes, { prefix: "/private/api/grades" });
 

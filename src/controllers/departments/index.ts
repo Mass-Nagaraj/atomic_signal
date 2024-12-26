@@ -44,9 +44,9 @@ export async function getDepts(
 ) {
     try{
                  
-        const team_members = await prisma.departments_master.findMany();
+        const departments = await prisma.departments_master.findMany();
         
-        return team_members;
+        return departments;
         
     }catch(error) {
         return reply.code(200).send(error)
