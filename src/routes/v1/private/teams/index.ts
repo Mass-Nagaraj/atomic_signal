@@ -52,9 +52,9 @@ export const TeamsRoutes: FastifyPluginAsync = async (
     show_my_team_members
   );
 
-  // fastify.get(
-  //   "/show_my_team_members/:team_lead_id",
-  //   { preHandler: [fastify.authenticate] },
-  //   show_my_team_members
-  // );
+  fastify.get(
+    "/getDepts",
+    { preHandler: [fastify.authenticate] },
+    getDepts
+  );
 };
