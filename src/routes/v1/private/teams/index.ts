@@ -27,7 +27,7 @@ export const TeamsRoutes: FastifyPluginAsync = async (
     "/add_team_member",
     {
       schema: {
-        // preHandler: [fastify.authenticate],
+        preHandler: [fastify.authenticate],
         body: $ref("add_team_memberSchema"),
         response: {
           200: $ref("add_team_memberResponseSchema"),
@@ -43,11 +43,18 @@ export const TeamsRoutes: FastifyPluginAsync = async (
   );
   fastify.put<{ Params: Profile_RequestSchema; Body: add_team_memberSchema }>(
     "/update_team_member_profile/:team_member_id",
+    { preHandler: [fastify.authenticate]},
     update_team_member_profile
   );
   fastify.get<{ Params: Show_My_team_members }>(
     "/show_my_team_members/:team_lead_id",
-    // { preHandler: [fastify.authenticate] },
+    { preHandler: [fastify.authenticate] },
     show_my_team_members
+  );
+
+  fastify.get(
+    "/getDepts",
+    { preHandler: [fastify.authenticate] },
+    getDepts
   );
 };

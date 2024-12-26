@@ -200,4 +200,24 @@ export async function show_my_team_members(
     }
 }
 
+export async function getDepts(
+    
+    request:FastifyRequest<{
+        Params:Show_My_team_members
+    }>,
+    reply:FastifyReply
+    
+) {
+    try{
+        
+                
+        const team_members = await prisma.team_members.findMany();
+        
+        return team_members;
+        
+    }catch(error) {
+        return reply.code(200).send(error)
+    }
+}
+
 
