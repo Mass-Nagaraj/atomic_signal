@@ -38,17 +38,17 @@ export const TeamsRoutes: FastifyPluginAsync = async (
     addTeam_member
   );
 
-  fastify.get<{ Params: Profile_RequestSchema }>(
-    "/show_profile/:team_member_id",
+  fastify.get<{ Querystring: Profile_RequestSchema }>(
+    "/show_profile",
     show_profile
   );
-  fastify.put<{ Params: Profile_RequestSchema; Body: add_team_memberSchema }>(
-    "/update_team_member_profile/:team_member_id",
+  fastify.put<{ Querystring: Profile_RequestSchema; Body: add_team_memberSchema }>(
+    "/update_team_member_profile",
     { preHandler: [fastify.authenticate]},
     update_team_member_profile
   );
-  fastify.get<{ Params: Show_My_team_members }>(
-    "/show_my_team_members/:team_lead_id",
+  fastify.get<{ Querystring: Show_My_team_members }>(
+    "/show_my_team_members",
     { preHandler: [fastify.authenticate] },
     show_my_team_members
   );

@@ -86,13 +86,13 @@ export async function getRoles(
 
 export async function getFeedback_from_id(
     request:FastifyRequest<{
-        Params: Feedback_from_id
+        Querystring: Feedback_from_id
    }>,
    reply:FastifyReply
 ) {
     try{
 
-        const {from_id}=request.params;
+        const {from_id}=request.query;
 
         const Feedbacks = await prisma.feedbacks.findMany({
             where:{
@@ -131,13 +131,13 @@ export async function getFeedback_from_id(
 
 export async function get_feedback_to_id(
     request:FastifyRequest<{
-        Params: Feedback_To_id 
+        Querystring: Feedback_To_id 
    }>,
    reply:FastifyReply
 ) {
     try{
 
-        const {to_id}=request.params;
+        const {to_id}=request.query;
 
         const Feedbacks = await prisma.feedbacks.findMany({
             where:{

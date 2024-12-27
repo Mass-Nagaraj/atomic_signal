@@ -29,6 +29,6 @@ export const SignalsRoutes: FastifyPluginAsync = async (
         }
     }, addSignal)
     
-    fastify.put<{ Params: Signal_ID,Body:UpdateSignalSchema  }>("/update_signal/:signal_id", update_signal)
+    fastify.put<{ Querystring: Signal_ID,Body:UpdateSignalSchema  }>("/update_signal", update_signal)
    
 }

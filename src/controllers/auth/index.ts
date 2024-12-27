@@ -5,7 +5,7 @@ import { hashPassword, verifyPassword } from "../../utils.ts/hash";
 import fastifyPlugin from "fastify-plugin";
 import exp from "constants";
 
-interface Params {
+interface QueryParams {
  id:string
 }
 
@@ -104,12 +104,12 @@ export async function loginHandler(
 
 
 export async function getUserDetails(
-    request: FastifyRequest<{ Params: Params }>,
+    request: FastifyRequest<{ Querystring: QueryParams }>,
     reply:FastifyReply
 ) {
     try{
        
-        const {id} = request.params;
+        const {id} = request.query;
         const user=await prisma.users.findUnique({
             where:{
                 id:id

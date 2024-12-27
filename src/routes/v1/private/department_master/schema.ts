@@ -11,6 +11,7 @@ const addDept = z.object({
 
 const UpdateDeptSchema= z.object({
     
+    id:z.string(),
     name:z.string().optional(),
     is_active:z.boolean().optional(),
 

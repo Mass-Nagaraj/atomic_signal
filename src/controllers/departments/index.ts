@@ -2,10 +2,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../../utils.ts/prisma";
 import { addDept, UpdateDeptSchema } from "../../routes/v1/private/department_master/schema";
-
-interface dept {
-    dept_id:string,
-}
    
 
 export async function add_Deptartment(
@@ -55,18 +51,16 @@ export async function getDepts(
 
 export async function update_dept(
     request:FastifyRequest<{
-         Params: dept,
          Body:UpdateDeptSchema 
     }>,
     reply:FastifyReply
 ) {
     try{
 
-        const {name,is_active}=request.body;
-        const {dept_id} = request.params; // This should be {} closed bracktes .Params varcables
+        const {id,name,is_active}=request.body;
         const updated_dept = await prisma.departments_master.update({
             where: {
-                id: dept_id,
+                id: id,
             },
             data: { name,is_active},
          
