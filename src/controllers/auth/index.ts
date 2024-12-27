@@ -82,12 +82,12 @@ export async function loginHandler(
             // console.log()
             // console.log(user);
             
-            return reply.send({accessToken,
-                user: {
+            return reply.send({
+                    accessToken:accessToken,
                     id: user.id,
-                    email: user.user_name,
-                    name: user.email, 
-                }})
+                    email: user.email,
+                    name: user.user_name, 
+                })
         }else{
             return reply.code(401).send({
                 message:"Invalid password...!"
