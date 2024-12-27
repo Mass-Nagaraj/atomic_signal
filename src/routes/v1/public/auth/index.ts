@@ -3,9 +3,10 @@ import {  getUserDetails, loginHandler, registerUserHandler } from '../../../../
 import { $ref } from './schema';
 import { show_my_team_members, show_profile } from '../../../../controllers/teams';
 
-interface id{
-    id :string
+interface Params {
+    id: string;
 }
+
 const authRoute: FastifyPluginAsync = async (
     fastify: FastifyInstance,
     options
@@ -34,7 +35,7 @@ const authRoute: FastifyPluginAsync = async (
     });
     
 
-      fastify.get<{ Params: id }>(
+      fastify.get<{ Params: Params }>(
         "/getUserDetails/:id",
         getUserDetails
       );

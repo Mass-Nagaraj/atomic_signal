@@ -5,7 +5,7 @@ import { hashPassword, verifyPassword } from "../../utils.ts/hash";
 import fastifyPlugin from "fastify-plugin";
 import exp from "constants";
 
-interface id {
+interface Params {
  id:string
 }
 
@@ -104,9 +104,7 @@ export async function loginHandler(
 
 
 export async function getUserDetails(
-    request:FastifyRequest<{
-         Params: id 
-    }>,
+    request: FastifyRequest<{ Params: Params }>,
     reply:FastifyReply
 ) {
     try{
