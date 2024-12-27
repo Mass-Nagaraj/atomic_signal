@@ -35,7 +35,7 @@ const authRoute: FastifyPluginAsync = async (
     
 
       fastify.get<{ Params: email }>(
-        "/getUserDetails",
+        "/getUserDetails/:email",
         getUserDetails
       );
 
