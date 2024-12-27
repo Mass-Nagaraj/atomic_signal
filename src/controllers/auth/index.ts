@@ -5,8 +5,8 @@ import { hashPassword, verifyPassword } from "../../utils.ts/hash";
 import fastifyPlugin from "fastify-plugin";
 import exp from "constants";
 
-interface email {
- email:string
+interface id {
+ id:string
 }
 
 export async function registerUserHandler(
@@ -105,14 +105,18 @@ export async function loginHandler(
 
 export async function getUserDetails(
     request:FastifyRequest<{
-         Params: email 
+         Params: id 
     }>,
     reply:FastifyReply
 ) {
     try{
        
-        const {email} = request.params;
-        const user=await findUserByEmail(email);
+        const {id} = request.params;
+        const user=await prisma.users.findUnique({
+            where:{
+                id:id
+            }
+        })
         
         if(!user) {
             return reply.code(401).send({
