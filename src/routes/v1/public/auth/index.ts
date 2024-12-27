@@ -3,7 +3,7 @@ import {  getUserDetails, loginHandler, registerUserHandler } from '../../../../
 import { $ref } from './schema';
 import { show_my_team_members, show_profile } from '../../../../controllers/teams';
 
-interface Params {
+interface QueryParams {
     id: string;
 }
 
@@ -35,8 +35,8 @@ const authRoute: FastifyPluginAsync = async (
     });
     
 
-      fastify.get<{ Params: Params }>(
-        "/getUserDetails/:id",
+      fastify.get<{ Querystring: QueryParams }>(
+        "/getUserDetails",
         getUserDetails
       );
 

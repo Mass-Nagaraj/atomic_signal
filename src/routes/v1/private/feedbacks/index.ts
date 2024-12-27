@@ -50,15 +50,15 @@ export const feedBackRoutes: FastifyPluginAsync = async (
     add_feedback
   );
 
-  fastify.get<{ Params: Feedback_from_id }>(
-    "/getFeedback_from_id/:from_id",
+  fastify.get<{ Querystring: Feedback_from_id  }>(
+    "/getFeedback_from_id",
     // { preHandler: [fastify.authenticate] },
     getFeedback_from_id
   );
 
-  fastify.get<{ Params: Feedback_To_id }>(
-    "/get_feedback_to_id/:to_id",
-    // { preHandler: [fastify.authenticate] },
+  fastify.get<{ Querystring: Feedback_To_id }>(
+    "/get_feedback_to_id",
+    { preHandler: [fastify.authenticate] },
     get_feedback_to_id
   );
 };

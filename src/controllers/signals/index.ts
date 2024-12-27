@@ -37,7 +37,7 @@ export async function addSignal(
 
 export async function update_signal(
     request:FastifyRequest<{
-         Params: Signals_ID,
+         Querystring: Signals_ID,
          Body:UpdateSignalSchema 
     }>,
     reply:FastifyReply
@@ -45,7 +45,7 @@ export async function update_signal(
     try{
 
         const {name,is_active}=request.body;
-        const {signal_id} = request.params; // This should be {} closed bracktes .Params varcables
+        const {signal_id} = request.query; // This should be {} closed bracktes .Params varcables
         const updated_signal = await prisma.signals_master.update({
             where: {
                 id: signal_id,

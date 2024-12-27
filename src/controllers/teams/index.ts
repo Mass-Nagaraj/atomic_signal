@@ -59,13 +59,13 @@ export async function addTeam_member(
 
 export async function show_profile(
     request:FastifyRequest<{
-         Params: Profile_RequestSchema 
+        Querystring: Profile_RequestSchema 
     }>,
     reply:FastifyReply
 ) {
     try{
 
-        const {team_member_id }=request.params;
+        const {team_member_id }=request.query;
         
         const user_profile = await prisma.team_members.findUnique({
             where: {
@@ -112,14 +112,14 @@ export async function show_profile(
 
 export async function update_team_member_profile(
     request:FastifyRequest<{
-         Params: Profile_RequestSchema,
+        Querystring: Profile_RequestSchema,
          Body:add_team_memberSchema 
     }>,
     reply:FastifyReply
 ) {
     try{
 
-        const {team_member_id }=request.params;
+        const {team_member_id }=request.query;
         const {name,email,join_date,department_id,designation_id,role_id,report_to,is_active}=request.body;
         
         const updated_user_profile = await prisma.team_members.update({
@@ -140,7 +140,7 @@ export async function update_team_member_profile(
 export async function show_my_team_members(
     
     request:FastifyRequest<{
-        Params:Show_My_team_members
+        Querystring:Show_My_team_members
     }>,
     reply:FastifyReply
     
@@ -148,7 +148,7 @@ export async function show_my_team_members(
     try{
         
         
-        const {team_lead_id}=request.params;
+        const {team_lead_id}=request.query;
         
         const team_members = await prisma.team_members.findMany({
             where: {
