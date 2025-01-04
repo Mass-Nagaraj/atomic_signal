@@ -43,11 +43,9 @@ const app: FastifyPluginAsync<AppOptions> = async (
   fastify,
   opts
 ): Promise<void> => {
- 
   // fastify.register(jwt,{
   //   secret: 'your-secret-key',
   // })
-
 
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused

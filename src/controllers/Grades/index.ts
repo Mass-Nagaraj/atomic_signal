@@ -10,7 +10,7 @@ export async function EditGrade(
   request: FastifyRequest<{
     Body: UpdateGrade;
   }>,
-  reply: FastifyReply
+  reply: FastifyReply,
 ) {
   try {
     const { id, name, is_active } = request.body;

@@ -15,5 +15,5 @@ export const { schemas: GradeSchema, $ref } = buildJsonSchemas(
   },
   {
     $id: "Gradeschema",
-  }
+  },
 );

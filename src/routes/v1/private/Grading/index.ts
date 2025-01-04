@@ -4,7 +4,7 @@ import { UpdateGrade } from "./schema";
 
 export const GradingRoutes: FastifyPluginAsync = async (
   fastify: FastifyInstance,
-  options
+  options,
 ): Promise<any> => {
   // This Param variable names and controll function variable name should be same
 
