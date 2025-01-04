@@ -9,24 +9,22 @@ import createMasterGrading from "./seed/master_grading";
 
 const prisma = new PrismaClient();
 
-
-async function main(){
-    await createFeedBackTypes();
-    await createMasterRoles();
-    await createMasterDepartments();
-    await createMasterDesignations();
-    await createMasterSignals();
-    await createMasterPerformance();
-    await createMasterGrading();
+async function main() {
+  await createFeedBackTypes();
+  await createMasterRoles();
+  await createMasterDepartments();
+  await createMasterDesignations();
+  await createMasterSignals();
+  await createMasterPerformance();
+  await createMasterGrading();
 }
 
 main()
-.then(async ()=>{
+  .then(async () => {
     await prisma.$disconnect();
-
-})
-.catch(async (e)=>{
+  })
+  .catch(async (e) => {
     console.log(e);
     await prisma.$disconnect();
-    process.exit(1);    
-})
+    process.exit(1);
+  });

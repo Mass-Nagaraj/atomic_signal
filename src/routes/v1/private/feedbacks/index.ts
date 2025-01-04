@@ -19,12 +19,12 @@ interface Feedback_To_id {
 
 export const feedBackRoutes: FastifyPluginAsync = async (
   fastify: FastifyInstance,
-  options
+  options,
 ): Promise<any> => {
   fastify.get(
     "/get_perfomances",
     // { preHandler: [fastify.authenticate] },
-    get_perfomances
+    get_perfomances,
   );
 
   fastify.get("/get_signals", get_signals);
@@ -33,7 +33,7 @@ export const feedBackRoutes: FastifyPluginAsync = async (
   fastify.get(
     "/getRoles",
     // { preHandler: [fastify.authenticate] },
-    getRoles
+    getRoles,
   );
 
   fastify.post(
@@ -47,18 +47,18 @@ export const feedBackRoutes: FastifyPluginAsync = async (
         },
       },
     },
-    add_feedback
+    add_feedback,
   );
 
-  fastify.get<{ Querystring: Feedback_from_id  }>(
+  fastify.get<{ Querystring: Feedback_from_id }>(
     "/getFeedback_from_id",
     // { preHandler: [fastify.authenticate] },
-    getFeedback_from_id
+    getFeedback_from_id,
   );
 
   fastify.get<{ Querystring: Feedback_To_id }>(
     "/get_feedback_to_id",
     { preHandler: [fastify.authenticate] },
-    get_feedback_to_id
+    get_feedback_to_id,
   );
 };

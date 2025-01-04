@@ -1,7 +1,6 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import {
   addTeam_member,
-
   show_my_team_members,
   show_profile,
   update_team_member_profile,
@@ -18,7 +17,7 @@ interface Show_My_team_members {
 
 export const TeamsRoutes: FastifyPluginAsync = async (
   fastify: FastifyInstance,
-  options
+  options,
 ): Promise<any> => {
   fastify.get("/teamhi", async function () {
     return { teamhi: "hello team..!" };
@@ -35,23 +34,24 @@ export const TeamsRoutes: FastifyPluginAsync = async (
         },
       },
     },
-    addTeam_member
+    addTeam_member,
   );
 
   fastify.get<{ Querystring: Profile_RequestSchema }>(
     "/show_profile",
-    show_profile
+    show_profile,
   );
-  fastify.put<{ Querystring: Profile_RequestSchema; Body: add_team_memberSchema }>(
+  fastify.put<{
+    Querystring: Profile_RequestSchema;
+    Body: add_team_memberSchema;
+  }>(
     "/update_team_member_profile",
-    { preHandler: [fastify.authenticate]},
-    update_team_member_profile
+    { preHandler: [fastify.authenticate] },
+    update_team_member_profile,
   );
   fastify.get<{ Querystring: Show_My_team_members }>(
     "/show_my_team_members",
     { preHandler: [fastify.authenticate] },
-    show_my_team_members
+    show_my_team_members,
   );
-
-
 };
