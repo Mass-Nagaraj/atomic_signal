@@ -4,16 +4,25 @@ import { buildJsonSchemas } from "fastify-zod";
 const addSignal = z.object({
   name: z.string(),
   is_active: z.boolean(),
+  created_at:z.string(),
+  created_by:z.string(),
+  updated_at:z.string(),
+  updated_by:z.string()
+
 });
 
 const AddSignal_ResponseSchema = z.object({
   name: z.string(),
   is_active: z.boolean(),
+  
+  
 });
 
 const UpdateSignalSchema = z.object({
   name: z.string().optional(),
   is_active: z.boolean().optional(),
+  updated_at:z.string(),
+  updated_by:z.string()
 });
 
 export type addSignal = z.infer<typeof addSignal>;

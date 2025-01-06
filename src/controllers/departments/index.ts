@@ -49,12 +49,12 @@ export async function update_dept(
   reply: FastifyReply,
 ) {
   try {
-    const { id, name, is_active } = request.body;
+    const { id, name, is_active,updated_at,updated_by } = request.body;
     const updated_dept = await prisma.departments_master.update({
       where: {
         id: id,
       },
-      data: { name, is_active },
+      data: { name, is_active,updated_at,updated_by },
     });
 
     return reply.code(200).send(updated_dept);
