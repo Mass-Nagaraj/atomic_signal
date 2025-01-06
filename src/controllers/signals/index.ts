@@ -16,12 +16,16 @@ export async function addSignal(
   reply: FastifyReply,
 ) {
   try {
-    const { name, is_active } = request.body;
+    const { name, is_active,created_at,created_by,updated_at,updated_by } = request.body;
 
     const add_member = await prisma.signals_master.create({
       data: {
         name,
         is_active,
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
       },
     });
 
@@ -39,13 +43,13 @@ export async function update_signal(
   reply: FastifyReply,
 ) {
   try {
-    const { name, is_active } = request.body;
+    const { name, is_active,updated_at,updated_by } = request.body;
     const { signal_id } = request.query; // This should be {} closed bracktes .Params varcables
     const updated_signal = await prisma.signals_master.update({
       where: {
         id: signal_id,
       },
-      data: { name, is_active },
+      data: { name, is_active,updated_at,updated_by },
     });
 
     return reply.code(200).send(updated_signal);
