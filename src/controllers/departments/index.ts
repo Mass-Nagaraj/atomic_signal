@@ -13,12 +13,16 @@ export async function add_Deptartment(
   reply: FastifyReply,
 ) {
   try {
-    const { name, is_active } = request.body;
+    const { name, is_active,created_at,created_by,updated_at,updated_by } = request.body;
 
     const add_member = await prisma.departments_master.create({
       data: {
         name,
         is_active,
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
       },
     });
 
